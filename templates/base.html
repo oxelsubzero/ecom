@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>ShopGrids - Boutique de vélo, cross, skateboard, moto.</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}" />
+    <link rel="stylesheet" href="{% static "css/LineIcons.3.0.css"%}" />
+    <link rel="stylesheet" href="{% static "css/tiny-slider.css"%}" />
+    <link rel="stylesheet" href="{% static "css/glightbox.min.css"%}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static "css/main.css"%}" />""
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- Preloader -->
+
+    <!-- /End Preloader -->
+
+    <!-- Start Header Area -->
+    <header class="header navbar-area fixed-top">
+        <!-- Start Header Middle -->
+        <div class="header-middle  fixed-top" style="background-color:white;">
+            <div class="container ">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-7">
+                        <!-- Start Header Logo -->
+                        <a class="navbar-brand" href="{% url "index" %}">
+                            <img src="{% static "images/logo/logo.svg"%}" alt="Logo">
+                        </a>
+                        <!-- End Header Logo -->
+                    </div>
+                    <div class="col-lg-5 col-md-7 d-xs-none">
+                        <!-- Start Main Menu Search -->
+                        <div class="main-menu-search">
+                            <!-- navbar search start -->
+                            <div class="navbar-search search-style-5">
+                                <div class="search-input">
+                                    <input type="text" placeholder="Search">
+                                </div>
+                                <div class="search-btn">
+                                    <button><i class="lni lni-search-alt"></i></button>
+                                </div>
+                            </div>
+                            <!-- navbar search Ends -->
+                        </div>
+                        <!-- End Main Menu Search -->
+                    </div>
+                    <div class="col-lg-4 col-md-2 col-5">
+                        <div class="middle-right-area">
+                            <div class="navbar-cart">
+
+
+                                
+                              
+                                <div class="wishlist">
+                                    <a href="{% url "index" %}">
+                                        <i class="lni lni-home"></i>
+                                    </a>
+                                </div>
+                                <div class="wishlist">
+                                    <a href="{% url "shop" %}">
+                                        <i class="fas fa-store"></i>
+                                    </a>
+                                </div>
+                        
+                                <div class="cart-items">
+                                    <a href="javascript:void(0)" class="main-btn">
+                                        <i class="lni lni-cart"></i>
+                                        <span class="total-items"> {% if totalitem %}{{totalitem}} {% else %} 0{% endif %}</span>
+                                    </a>
+                                    <!-- Shopping Item -->
+                                    <div class="shopping-item">
+                                        <div class="dropdown-cart-header">
+                                            <span>{{totalitem}} Produits</span>
+                                            <a href="{% url "cart" %}">Voir</a>
+                                        </div>
+                                        <ul class="shopping-list">
+                                            {% for item in items %}
+                                            <li>
+                                                <a href="{% url 'supprimer_du_panier' item.id %}" class="remove" title="Remove this item"><i
+                                                        class="lni lni-close"></i></a>
+                                                <div class="cart-img-head">
+                                                    <a class="cart-img" href="product-details.html"><img
+                                                            src="{{item.produit.image.url}}" alt="#"></a>
+                                                </div>
+
+                                                <div class="content">
+                                                    <h4><a href="product-details.html">
+                                                            {{item.produit.nom}}</a></h4>
+                                                    <p class="quantity">{{item.quantite}}x - <span class="amount">{{item.produit.prix}} €</span></p>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="bottom">
+                                            <div class="total">
+                                                <span>Total</span>
+                                                <span class="total-amount">{{total}} €</span>
+                                            </div>
+                                            <div class="button">
+                                                <a href="{% url "checkout" %}" class="btn animate">Paiement</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ End Shopping Item -->
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+ 
+
+            </div>
+        </div>
+        <!-- End Header Middle -->
+        
+    </header>
+
+
+    
+    <!-- End Header Area -->
+
+
+
+
+   {% block content %}{% endblock content %}
+
+    <!-- Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-12">
+                            <div class="footer-logo">
+                                <a href="index.html">
+                                    <img src="{% static "images/logo/white-logo.svg"%}" alt="#">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Top -->
+        <!-- Start Footer Middle -->
+        <div class="footer-middle">
+            <div class="container">
+                <div class="bottom-inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-contact">
+                                <h3>Vous pouvez nous contacter</h3>
+                                <p class="phone">Phone: +1 (900) 33 169 7720</p>
+                                <ul>
+                                    <li><span>Lundi-Vendredi: </span> 9.00 - 20.00 </li>
+                                    <li><span>Samedi: </span> 10.00  - 18.00 </li>
+                                </ul>
+                                <p class="mail">
+                                    <a href="mailto:support@shopgrids.com">support@shopgrids.com</a>
+                                </p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner-content">
+                    <div class="row align-items-center">
+                        <div class="col-lg-4 col-12">
+                            <div class="payment-gateway">
+                                <span>Nous acceptons :</span>
+                                <img src="{% static "images/footer/credit-cards-footer.png"%}" alt="#">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <div class="copyright">
+                                <p>Designed and Developed by topshop</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <ul class="socila">
+                                <li>
+                                    <span>Suivez nous sur :</span>
+                                </li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Bottom -->
+    </footer>
+    <!--/ End Footer Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/tiny-slider.js"%}"></script>
+    <script src="{% static "js/glightbox.min.js"%}"></script>
+    <script src="{% static "js/main.js"%}"></script>
+    <!-- Import jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Import Bootstrap JavaScript (if using Bootstrap) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your existing HTML code -->
+
+
+
+    <script type="text/javascript">
+      
+        //========= Hero Slider 
+        tns({
+            container: '.hero-slider',
+            slideBy: 'page',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 0,
+            items: 1,
+            nav: false,
+            controls: true,
+            controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
+        });
+
+        //======== Brand Slider
+        tns({
+            container: '.brands-logo-carousel',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 15,
+            nav: false,
+            controls: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 3,
+                },
+                768: {
+                    items: 5,
+                },
+                992: {
+                    items: 6,
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

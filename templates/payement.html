@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="card" style="margin-top:70px;">
+    <div class="card-body">
+        <h5 class="card-title">Paiement</h5>
+            <p class="card-text" style="color:black;">{{addresse.description}}</p>
+        <div class="info">
+            <h5>Code banque</h5>
+            <p>{{ addresse.code_banque }} </p>
+        
+        
+        </div>
+        
+        <div class="info">
+            <h5 style="margin-bottom: 10px;display:block;">Numero de compte</h5>
+            <p style="color:black;">{{ addresse.numero_de_compte }} </p>
+        </div>
+        
+        <div class="info">
+            <h5>IBAN</h5>
+            <p style="color:black;">{{ addresse.iban }} </p>
+        </div>
+        
+        <div class="info">
+            <h5>BIC</h5>
+            <p style="color:black;">{{ addresse.bic }} </p>
+        </div>
+        
+        <div class="info">
+            <h5 style="color:black;">Pays</h5>
+            <p>{{ addresse.pays }} </p>
+        </div>
+        
+        <div class="info">
+            <h5>Titulaire</h5>
+            <p style="color:black;">{{ addresse.titulaire }} </p>
+        </div>
+    </div>
+    
+  </div>
+
+
+  <div class="card text-left" style="margin-bottom:100px;">
+    <div class="card-body">
+      <h4 class="card-title">Téléverser une preuve de paiement</h4>
+      <form method="post" enctype="multipart/form-data" action="{% url 'upload_receipt' %}">
+        {% csrf_token %}
+        <div class="col-sm-10">
+            <input class="form-control" type="file" id="id_receipt_image" name="receipt_image" >
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" type="button">Envoyer</button>
+          </div>
+    </form>
+    </div>
+  </div>
+
+
+{% endblock content %}

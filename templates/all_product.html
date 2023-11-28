@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Start Trending Product Area -->
+<section class="trending-product section" style="margin-top: 12px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Boutique</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for produit in produits %}
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="single-product">
+                    <div class="product-image">
+                        <a href="{% url "detail" produit.id %}">
+                        <img src="{{produit.image.url}}" alt="#">
+                        </a>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="title">
+                            <a href="{% url "detail" produit.id %}">{{produit.nom}}</a>
+                        </h4>
+                        <ul class="review">
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                        </ul>
+                        <div class="price">
+                            <span>{{produit.prix}} €</span>
+                        </div>
+                        <div class="button">
+                            <a href="{% url 'ajouter_au_panier' produit.id %}" class="btn"><i class="lni lni-cart"></i> Add </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}   
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+
+

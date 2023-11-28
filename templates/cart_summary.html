@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card" style="margin-top:55px">
+    <div class="card-body">
+      <h5 class="card-title">Panier</h5>
+
+      <!-- Default Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Produits</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+          <tr>
+            <th scope="row"><img src='{{item.produit.image.url}}' alt="{{item.produit.nom}}" style="width:50px"></th>
+            <td>{{item.produit.nom}}</td>
+            <td>{{item.quantite}} x {{item.produit.prix}} €</td>
+            <td>{{item.total_cost}} €</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      <!-- End Default Table Example -->
+    </div>
+  </div>
+
+
+
+
+<div class="card text-left">
+  <div class="card-body">
+
+    <div class="col-12">
+        <div class="form-floating mb-3">
+            <input name="Coupon" id="coupon" class="form-control"  placeholder="Entrez un code coupon (si vous en avez)">
+            <label for="coupon">Entrez un code coupon (si vous en avez)</label>
+          </div>
+    </div>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">total</th>
+                <th scope="col">Livraison</th>
+                <th scope="col">économisez</th>
+                <th scope="col">payez</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">{{ total  }} €</th>
+                <td>Gratuit</td>
+                <td>40.00 €</td>
+                <td>{{total}} €</td>
+              </tr>
+            </tbody>
+        </table>
+        
+        <a href="{% url 'checkout'  %}" class="btn btn-outline-primary" id="checkout">Paiement</a>
+        <a href="{% url 'shop'%}" class="btn btn-outline-primary">Continuer à acheter</a>
+
+  </div>
+</div>
+
+
+  
+
+{% endblock content %}

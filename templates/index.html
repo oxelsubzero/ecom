@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+ {% load static %}
+
+{% block content %}
+
+<!-- Start Hero Area -->
+<section class="hero-area" style="margin-top:40px;">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-8 col-12 custom-padding-right">
+                <div class="slider-head">
+                    <!-- Start Hero Slider -->
+                    <div class="hero-slider">
+                        <!-- Start Single Slider -->
+                        {% for hero in heros %}
+                        <div class="single-slider"
+                            style="background-image: url({{hero.image.url}});">
+                            <div class="content">
+                                <h2><span>{{hero.subtitle}}</span>
+                                    {{hero.tile}}
+                                </h2>
+                                <p>{{hero.description}}</p>
+                                <h3><span>Seulement</span> {{hero.price}} €</h3>
+                                <div class="button">
+                                    <a href="{% url "shop" %}" class="btn">Achetez maintenant</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- End Hero Slider -->
+                </div>
+            </div>
+
+
+
+
+            <div class="col-lg-4 col-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 col-12">
+                        <!-- Start Small Banner -->
+                        <div class="hero-small-banner style2">
+                            <div class="content">
+                                <h2>Vente flash !</h2>
+                                <p>Économiser jusqu'à 40% sur tout vos achats en ligne ce mois.</p>
+                                <div class="button">
+                                    <a class="btn" href="{% url "shop" %}">Tout les articles</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start Small Banner -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Hero Area -->
+
+
+
+
+<!-- Start Trending Product Area -->
+<section class="trending-product section" style="margin-top: 12px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Produits populaire</h2>
+                    <p>Nous avons des vélo, moto, cross, buggy, skateboard neuf comme d'occasion.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for produit in produits %}
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="single-product">
+                    <div class="product-image">
+                        <a href="{% url "detail" produit.id %}">
+                        <img src="{{produit.image.url}}" alt="#">
+                        </a>
+                    </div>
+                    <div class="product-info">
+                        <h4 class="title">
+                            <a href="{% url "detail" produit.id %}">{{produit.nom}}</a>
+                        </h4>
+                        <ul class="review">
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                            <li><i class="lni lni-star-filled"></i></li>
+                        </ul>
+                        <div class="price">
+                            <span>{{produit.prix}} €</span>
+                        </div>
+                        <div class="button">
+                            <a href="{% url 'ajouter_au_panier' produit.id %}" class="btn"><i class="lni lni-cart"></i> Add </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}    
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Start Shipping Info -->
+<section class="shipping-info">
+    <div class="container">
+        <ul>
+            <!-- Free Shipping -->
+            <li>
+                <div class="media-icon">
+                    <i class="lni lni-delivery"></i>
+                </div>
+                <div class="media-body">
+                    <h5>Livraison gratuit</h5>
+                    <span>À partir de 300€ d'achat</span>
+                </div>
+            </li>
+            <!-- Money Return -->
+            <li>
+                <div class="media-icon">
+                    <i class="lni lni-support"></i>
+                </div>
+                <div class="media-body">
+                    <h5>Support 24/7.</h5>
+                    <span>Chat direct ou appel.</span>
+                </div>
+            </li>
+            <!-- Support 24/7 -->
+            <li>
+                <div class="media-icon">
+                    <i class="lni lni-credit-cards"></i>
+                </div>
+                <div class="media-body">
+                    <h5>Paiement en ligne.</h5>
+                    <span>Services de paiement sécurisé.</span>
+                </div>
+            </li>
+            <!-- Safe Payment -->
+            <li>
+                <div class="media-icon">
+                    <i class="lni lni-reload"></i>
+                </div>
+                <div class="media-body">
+                    <h5>Retour facile</h5>
+                    <span>Pendant 7 jours apres l'achat</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- End Shipping Info -->
+
+{% endblock content %}

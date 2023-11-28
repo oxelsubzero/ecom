@@ -1,0 +1,31 @@
+{% extends "socialaccount/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+{% block content %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        {% if process == "connect" %}
+                            <h5 class="card-title text-center mb-4">{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h5>
+                            <p class="text-center">{% blocktrans with provider.name as provider %}You are about to connect a new third-party account from {{ provider }}.{% endblocktrans %}</p>
+                        {% else %}
+                            <h5 class="card-title text-center mb-4">{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</h5>
+                            <p class="text-justify">{% blocktrans with provider.name as provider %}Vous êtes sur le point de vous connecter à l'aide de votre compte {{ provider }}. Nous utilisons votre compte Google pour stocker les informations de votre panier ainsi que vos informations de livraison afin que notre service soit fiable, sécurisé et rapide.{% endblocktrans %}</p>
+                        {% endif %}
+                        {% element form method="post" no_visible_fields=True %}
+                            {% slot actions %}
+                                {% csrf_token %}
+                                <button class="btn btn-primary d-block mx-auto" type="submit" style="margin-top:10px;">{% trans "Continue" %}</button>
+                            {% endslot %}
+                        {% endelement %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
