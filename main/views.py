@@ -96,7 +96,19 @@ class Detail(View):
     def get(self,request,produit_id):
         # Retrieve the product based on the provided ID, or return a 404 error if not found
         product = get_object_or_404(Produit, pk=produit_id)
-
+        if request.user.is_authenticated:
+            panier, created = Panier.objects.get_or_create(user=request.user)
+            items = ItemPanier.objects.filter(panier=panier)
+            total = sum(item.total_cost for item in items)
+            totalitem = sum(item.quantite for item in items)
+            context = {
+                "items":items,
+                'product':product,
+                "total": total,
+                "totalitem": totalitem,
+                
+            }
+            return render(request, 'product-details.html', context)
         # Pass the extracted data to the template
         context = {
             'product':product
@@ -142,6 +154,19 @@ class Checkout(View):
         total,created = Total.objects.get_or_create(user=request.user)
 
         total_user = total.total_amount
+        if request.user.is_authenticated:
+            panier, created = Panier.objects.get_or_create(user=request.user)
+            items = ItemPanier.objects.filter(panier=panier)
+            total = sum(item.total_cost for item in items)
+            totalitem = sum(item.quantite for item in items)
+            context = {
+                "items":items,
+                "total":total_user,
+                "total": total,
+                "totalitem": totalitem,
+                
+            }
+            return render(request,"checkout.html",context)
         context = {
             "total":total_user
         }
@@ -243,6 +268,23 @@ class Checkout2 (View):
         addresse = Adresse.objects.all()[0]
         total,created = Total.objects.get_or_create(user=request.user)
         total_user = total.total_amount
+        if request.user.is_authenticated:
+            panier, created = Panier.objects.get_or_create(user=request.user)
+            items = ItemPanier.objects.filter(panier=panier)
+            total = sum(item.total_cost for item in items)
+            totalitem = sum(item.quantite for item in items)
+            context = {
+                "items":items,
+                "total":total_user,
+                "total": total,
+                "totalitem": totalitem,
+                "addresse":addresse,
+                "total":total_user
+                
+            }
+            return render(request,"payement.html",context)
+
+    
         context = {
             "addresse":addresse,
             "total":total_user
